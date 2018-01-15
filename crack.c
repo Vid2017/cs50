@@ -19,6 +19,10 @@ void getWord(int n, char* word){
     int i;
     int combinations;
 }
+
+/**
+ * check out https://stackoverflow.com/questions/10159649/generate-all-letter-combinations
+ **/
 void inc_str(char* alphabet, char *str, int* word_index){
     int index, carry;
     int max_index = CHARS - 1;
@@ -71,6 +75,7 @@ int check_hash(char* hash_given){
             {
                 printf("hash %s can be produced by %s\n", hashed_word, word);
                 ret_val = 1;
+                return 1;
             }
             inc_str(alphabet, word, word_index);
             t++;
