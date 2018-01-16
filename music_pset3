@@ -1,0 +1,117 @@
+// Helper functions for music
+
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+#include "helpers.h"
+
+// Converts a fraction formatted as X/Y to eighths
+int duration(string fraction)
+{
+    // TODO
+    int numer;
+    int denom;
+
+    numer = atoi(&fraction[0]);
+    denom = atoi(&fraction[2]);
+
+    int numof_eights = (numer * 8)/denom;
+
+    return numof_eights;
+
+}
+
+// Calculates frequency (in Hz) of a note
+int frequency(string note)
+{
+    // TODO
+    int A4freq = 440;
+    int currentfreq;
+    int octave;
+    double n = 0.0;
+    if (note[0] == 'A' && note[1] == '4')
+    {
+        return A4freq;
+    }
+    if (strlen(note) == 3)
+    {
+        octave = atoi(&note[2]);
+        }
+
+        else
+        {
+            octave = atoi(&note[1]);
+            //if octave is A
+        }
+
+        if((octave) > 4)//
+        {
+            currentfreq = round(A4freq * (pow(2.0, ( octave - 4.0))));
+        }
+        else if (octave < 4)
+        {
+                currentfreq = round(A4freq / (pow(2.0, (4.0 - double octave))));
+            }
+            else
+            {
+                currentfreq = A4freq;
+            }
+
+     if (note[1] == 'b') //
+    {
+        currentfreq = round(currentfreq )/ (pow(2.0, (1.0/12.0))));
+    }
+
+    else if (note[1] == '#')
+    {
+        currentfreq = round(currentfreq * (pow(2.0, (1.0/12.0))));
+    }
+
+      if (note[0] == 'B') //
+    {
+        n = 2.0; //only multiply
+         currentfreq = round(currentfreq * (pow(2.0, (n/12.0))));
+         return (currentfreq);
+    }
+    else if (note[0] == 'C')
+    {
+        n = 9.0;
+    }
+     else if (note[0] == 'D')
+    {
+        n = 7.0;
+    }
+     else if (note[0] == 'E')
+    {
+        n = 5.0;
+    }
+     else if (note[0] == 'F')
+    {
+        n = 4.0;
+    }
+     else if (note[0] == 'G')
+    {
+        n = 2.0;
+    }
+
+ currentfreq = round(currentfreq /(pow(2.0, (n/12.0))));
+
+    return (currentfreq);
+
+}
+
+// Determines whether a string represents a rest
+bool is_rest(string s)
+{
+    if (strlen(s) == 0)
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
+}
