@@ -69,7 +69,7 @@ int check_hash(char* hash_given){
         long max = (long)powl(CHARS,n);
         printf("combination %li %d %d\n", max, n, CHARS);
         do{
-            ///printf("%s",word);
+            //printf("%s ",word);
             hashed_word = crypt(word, salt);
             if ( strcmp(hashed_word, hash_given) == 0 )
             {
@@ -87,28 +87,6 @@ int check_hash(char* hash_given){
         printf("not matched");
     }
     return ret_val;
-
-
-
-    //check a-Z
-    for (i=0; i<6; i++){
-        for (int x = 0; x < 52; x++)
-        {
-            word[0] = alphabet[x];
-
-            //printf("%s\n", word);
-
-            hashed_word = crypt(word, salt);
-
-            if ( strcmp(hashed_word, hash_given) == 0 )
-            {
-                printf("hash %s can be produced by %s", hashed_word, word);
-                return 0;
-            }
-        }
-    }
-    printf("word not found\n");
-    return 1;
 }
 
 int main (int argc, char* argv[])

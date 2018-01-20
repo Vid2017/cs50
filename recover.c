@@ -1,4 +1,4 @@
-#include <cs50.h>
+//#include <cs50.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,11 +7,13 @@
 int main(void)
 {
     // open memory card file
-    FILE* input = fopen("card.raw", "r");
+    FILE* input = fopen("recover/card.raw", "r");
     if (input == NULL)
     {
         printf("Could not open card.raw.\n");
         return 2;
+    }else{
+	printf("Opened card\n");
     }
 
     // create buffer
@@ -34,7 +36,10 @@ int main(void)
             if (jpg_found == 1)
             {
                 // We found the start of a new pic so close out current picture
-                fclose(picture);
+		if (picture != NULL){
+                	fclose(picture);
+		}
+		//jpg_found = 0;
             }
             else
             {
@@ -44,12 +49,14 @@ int main(void)
 
             char filename[8];
             sprintf(filename, "%03d.jpg", filecount);
+	    printf("first file is %s\n", filename);
             picture = fopen(filename, "w");
             filecount++;
         }
-
+//	printf("jpg_found is %d\n", jpg_found);
         if (jpg_found == 1)
         {
+	    printf("writing to file\n");
             // write 512 bytes to file once we start finding jpgs
             fwrite(&buffer, BUFFER_SIZE, 1, picture);
         }
